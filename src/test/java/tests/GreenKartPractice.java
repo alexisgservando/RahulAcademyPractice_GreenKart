@@ -77,8 +77,32 @@ public class GreenKartPractice
 		gkPage.clickSortColumn(columnNumber);
 	}
 	
-	//10 ITEMS IN THE TABLE AND SORT 
-	//20 ITEMS IN THE TABLE AND SORT 
+	@Test(description = "Keep 10 items in the table and sort the table | Sort by first column")
+	public void TC06()
+	{
+		int columnNumber = 1; 
+		int noOfItems = 10;
+		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage.validatePageTitle();
+		gkPage.selectNumberOfItemsInTable(noOfItems);
+		gkPage.countItemsInTable(noOfItems);
+		gkPage.clickSortColumn(columnNumber);
+	}
+	
+	@Test(description = "Keep 20 items in the table and sort the table | Sort by first column")
+	public void TC07()
+	{
+		int columnNumber = 1; 
+		int noOfItems = 20;
+		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage.validatePageTitle();
+		gkPage.selectNumberOfItemsInTable(noOfItems);
+		gkPage.countItemsInTable(noOfItems);
+		gkPage.clickSortColumn(columnNumber);
+	}
+	
+	//SORT SECOND COLUMN (PRICES) - ASC
+	//SORT THIRD COLUMN (DISCOUNT PRICE) - ASC
 	//CLICK ON NEXT BUTTON ONE AT THE TIME AND PREVIOUS BUTTON ONE AT THE TIME 
 	//CLICK ON THE LAST BUTTON
 	

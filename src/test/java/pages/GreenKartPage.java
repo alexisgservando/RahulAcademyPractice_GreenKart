@@ -93,25 +93,27 @@ public class GreenKartPage
 		case 1:
 			driver.findElement(sortFirstColumn).click();
 			System.out.println("FIRST COLUMN SORTED");
-			this.validateAscendingOrder(index);
+			this.validateFirstColumnAscendingOrder(index);
 			break;
 		case 2: 
 			driver.findElement(sortSecondColumn).click();
 			System.out.println("SECOND COLUMN SORTED");
-			this.validateAscendingOrder(index);
+			//this.validateAscendingOrder(index);
+			//implement method to validate the prices are sorted
 			break;
 		case 3:
 			driver.findElement(sortThirdColumn).click();
 			System.out.println("THIRD COLUMN SORTED");
-			this.validateAscendingOrder(index);
+			//this.validateAscendingOrder(index);
+			//implement method to validate that the discounted prices are sorted 
 			break;
 		default:
 			break;
 		}
 	}
 	
-	//Method to validate that the values are sorted after clicking the column header (using the above method) | Finds 3 elements | takes the column number as parameter
-	public void validateAscendingOrder(int index)
+	//Method to validate that the values in the first column (Veg/fruit name) are sorted after clicking the column header (using the above method) | Finds 3 elements 
+	public void validateFirstColumnAscendingOrder(int index)
 	{
 		String expectedAriaSort = "ascending";
 		List<WebElement> headers = driver.findElements(columnHeaders);
