@@ -25,8 +25,8 @@ public class GreenKartPage
 	private By searchField = By.cssSelector("#search-field");
 	private By firstColumItems = By.xpath("//tbody/tr/td[1]");
 	private By sortFirstColumn = By.xpath("//th[1]/span[2]");
-	private By sortSecondColumn = By.xpath("//th[2]/span[2]");
-	private By sortThirdColumn = By.xpath("//th[3]/span[2]");
+	private By sortSecondColumn = By.xpath("//th[2]");
+	private By sortThirdColumn = By.xpath("//th[3]");
 	private By columnHeaders = By.xpath("//th[@aria-sort]");
 	// private By buttonsList = By.cssSelector("ul[aria-label='Pagination'] li");
 	

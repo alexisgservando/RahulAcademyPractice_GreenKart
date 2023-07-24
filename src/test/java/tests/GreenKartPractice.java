@@ -51,7 +51,7 @@ public class GreenKartPractice
 		GreenKartPage gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
-		gkPage.countItemsInTable(noOfItems);
+		gkPage.countItemsInTable(19);							//At the time of this script, there were 19 elements in total; update this value in the future
 	}
 	
 	@Test(description = "Search for a veggie/fruit and validate only 1 element is displayed")
@@ -97,11 +97,22 @@ public class GreenKartPractice
 		GreenKartPage gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
+		gkPage.countItemsInTable(19);							//At the time of this script, there were 19 elements in total; update this value in the future
+		gkPage.clickSortColumn(columnNumber);
+	}
+	
+	@Test(description = "Keep 10 items in the table and sort the table | Sort by second column")
+	public void TC08()
+	{
+		int columnNumber = 2; 
+		int noOfItems = 10;
+		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage.validatePageTitle();
+		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(noOfItems);
 		gkPage.clickSortColumn(columnNumber);
 	}
 	
-	//SORT SECOND COLUMN (PRICES) - ASC
 	//SORT THIRD COLUMN (DISCOUNT PRICE) - ASC
 	//CLICK ON NEXT BUTTON ONE AT THE TIME AND PREVIOUS BUTTON ONE AT THE TIME 
 	//CLICK ON THE LAST BUTTON

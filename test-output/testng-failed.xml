@@ -7,7 +7,7 @@
         <methods>
           <include name="teardown"/>
           <include name="setUp"/>
-          <include name="TC05"/>
+          <include name="TC08"/>
         </methods>
       </class> <!-- tests.GreenKartPractice -->
     </classes>
