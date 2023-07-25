@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.Arrays;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterTest;
@@ -12,6 +14,7 @@ public class GreenKartPractice
 {
 	//Variables
 	private WebDriver driver;
+	GreenKartPage gkPage;
 		
 	@BeforeTest
 	public void setUp()
@@ -21,14 +24,13 @@ public class GreenKartPractice
 		driver = new EdgeDriver();
 		driver.get("https://www.rahulshettyacademy.com/seleniumPractise/#/offers");
 		driver.manage().window().maximize();
-		
 	}
 	
 	@Test(description = "Select page size = 5 and validate that the number of products is 5")
 	public void TC01()
 	{
 		int noOfItems = 5;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(noOfItems);
@@ -38,7 +40,7 @@ public class GreenKartPractice
 	public void TC02()
 	{
 		int noOfItems = 10;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(noOfItems);
@@ -48,7 +50,7 @@ public class GreenKartPractice
 	public void TC03()
 	{
 		int noOfItems = 20;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(19);							//At the time of this script, there were 19 elements in total; update this value in the future
@@ -59,7 +61,7 @@ public class GreenKartPractice
 	{
 		int noOfItems = 1;
 		String item = "Orange";
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.searchItem(item);
 		gkPage.countItemsInTable(noOfItems);
@@ -70,7 +72,7 @@ public class GreenKartPractice
 	{
 		int columnNumber = 1; 
 		int noOfItems = 5;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(noOfItems);
@@ -82,7 +84,7 @@ public class GreenKartPractice
 	{
 		int columnNumber = 1; 
 		int noOfItems = 10;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(noOfItems);
@@ -94,7 +96,7 @@ public class GreenKartPractice
 	{
 		int columnNumber = 1; 
 		int noOfItems = 20;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(19);							//At the time of this script, there were 19 elements in total; update this value in the future
@@ -106,21 +108,71 @@ public class GreenKartPractice
 	{
 		int columnNumber = 2; 
 		int noOfItems = 10;
-		GreenKartPage gkPage = new GreenKartPage(driver);
+		gkPage = new GreenKartPage(driver);
 		gkPage.validatePageTitle();
 		gkPage.selectNumberOfItemsInTable(noOfItems);
 		gkPage.countItemsInTable(noOfItems);
 		gkPage.clickSortColumn(columnNumber);
 	}
 	
-	//SORT THIRD COLUMN (DISCOUNT PRICE) - ASC
-	//CLICK ON NEXT BUTTON ONE AT THE TIME AND PREVIOUS BUTTON ONE AT THE TIME 
-	//CLICK ON THE LAST BUTTON
+	@Test(description = "Keep 10 items in the table and sort the table | Sort by third column")
+	public void TC09()
+	{
+		int columnNumber = 3; 
+		int noOfItems = 10;
+		gkPage = new GreenKartPage(driver);
+		gkPage.validatePageTitle();
+		gkPage.selectNumberOfItemsInTable(noOfItems);
+		gkPage.countItemsInTable(noOfItems);
+		gkPage.clickSortColumn(columnNumber);
+	}
+	
+	@Test(dependsOnMethods = "TC01", description = "Keep 5 items in the table | Click pagination button: 1 | Validate that the first 2 buttons are disabled")
+	public void TC10()
+	{
+		String buttonName = "1";
+		List<Integer> expectedPositions = Arrays.asList(0, 1);
+		gkPage.clickPaginationButton(buttonName);
+		gkPage.validateTruePositions(expectedPositions);
+	}
+	
+	@Test(dependsOnMethods = "TC01", description = "Keep 5 items in the table | Click pagination button: Last | Validate the last 2 buttons are disabled")
+	public void TC11()
+	{
+		String buttonName = "Last";
+		List<Integer> expectedPositions = Arrays.asList(5, 6);
+		gkPage.clickPaginationButton(buttonName);
+		gkPage.validateTruePositions(expectedPositions);
+	}
+	
+	@Test(dependsOnMethods = "TC01", description = "Keep 5 items in the table | Click pagination button: Next | Validate the last 2 buttons are disabled after moving through the buttons")
+	public void TC12()
+	{
+		String buttonName = "Next";
+		List<Integer> expectedPositions = Arrays.asList(5, 6);
+		gkPage.clickPaginationButton(buttonName);
+		gkPage.clickPaginationButton(buttonName);
+		gkPage.clickPaginationButton(buttonName);
+		gkPage.validateTruePositions(expectedPositions);
+	}
+	
+	@Test(dependsOnMethods = "TC01", description = "Keep 5 items in the table | Click pagination button: Last | Validate the first 2 buttons are disabled after moving backwards through the buttons")
+	public void TC13()
+	{
+		String buttonName1 = "Last";
+		String buttonName2 = "Previous";
+		List<Integer> expectedPositions = Arrays.asList(0, 1);
+		gkPage.clickPaginationButton(buttonName1);
+		gkPage.clickPaginationButton(buttonName2);
+		gkPage.clickPaginationButton(buttonName2);
+		gkPage.clickPaginationButton(buttonName2);
+		gkPage.validateTruePositions(expectedPositions);
+	}
 	
 	@AfterTest
 	public void teardown()
 	{
-		//driver.quit();
+		driver.quit();
 		//driver.close();
 	}
 }
